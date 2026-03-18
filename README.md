@@ -21,7 +21,7 @@ Three data sources:
 
 ### The chief complaint text does most of the work
 
-The single biggest unlock was treating `chief_complaint_raw` as a first-class feature. Before: TF-IDF with 50 features, CV accuracy 0.891. After scaling to 2000 bigrams: **0.9989**. One change, 10 points of accuracy.
+Scaling `chief_complaint_raw` from 50 TF-IDF features to 2000 bigrams moved CV accuracy from 0.891 to 0.9989. One change, 10 points.
 
 The intuition holds up clinically — "thunderclap headache" and "minor skin rash" have very different acuity implications regardless of what the vitals say.
 
@@ -155,11 +155,11 @@ streamlit run dashboard/dashboard.py
 
 ## Lessons
 
-**Text beats everything else here.** When a dataset has free-text that directly describes what you're predicting, treat it as the primary feature from the start. Don't save it for later.
+**The complaint text does most of the work.** When a dataset has free-text that directly describes what you're predicting, that's the primary feature. Treat it that way from day one, not after everything else has failed.
 
-**Error analysis is worth more than hyperparameter tuning.** Going from 0.9989 to 0.9995 required understanding *why* the model was wrong, not trying random parameter changes. Every single error had the same root cause.
+**Error analysis beats hyperparameter tuning.** Going from 0.9989 to 0.9995 required understanding *why* the model was wrong, not trying parameter combinations. Every single error had the same root cause. Once you find it, the fix is obvious.
 
-**Know when to stop using a model.** For 99.4% of this dataset, the answer is already in the training data. A lookup table outperforms any model for those rows because it's exact, not approximate.
+**Sometimes the answer is already in the training data.** For 99.4% of this dataset, the right prediction was just a lookup. A lookup can't be wrong the way a model can. The model is only needed for the 0.6% where training data gives no definitive answer.
 
 ---
 
