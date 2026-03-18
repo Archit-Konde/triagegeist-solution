@@ -25,12 +25,11 @@
       background: #1e1e1e;
       position: relative;
       display: flex;
-      flex-direction: column;
-      padding: 56px 72px;
-      gap: 0;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* subtle grid bg */
+    /* grid bg */
     .card::before {
       content: '';
       position: absolute;
@@ -39,225 +38,229 @@
         linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
       background-size: 40px 40px;
-      pointer-events: none;
     }
 
-    /* accent corner glow */
+    /* glow — centered so it survives square crop */
     .card::after {
       content: '';
       position: absolute;
-      top: -120px; right: -120px;
-      width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(201,168,76,0.10) 0%, transparent 65%);
       pointer-events: none;
+    }
+
+    /* ── LEFT PANEL (outside square crop zone, decorative) ── */
+    .left-panel {
+      position: absolute;
+      left: 40px; top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 230px;
+      opacity: 0.7;
+    }
+
+    .mini-tier {
+      background: #252526;
+      border: 1px solid #3e3e42;
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-size: 11px;
+    }
+    .mini-tier .th { color: #C9A84C; font-weight: 600; font-size: 10px; letter-spacing: 0.05em; margin-bottom: 2px; }
+    .mini-tier .tv { color: #d4d4d4; }
+    .mini-tier .tp { color: #28c840; font-size: 10px; }
+
+    /* ── CENTER PANEL (always visible in square crop) ── */
+    .center {
+      position: relative;
+      z-index: 1;
+      width: 620px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
     }
 
     .top-bar {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 40px;
+      gap: 8px;
+      margin-bottom: 28px;
     }
-
-    .dot { width: 13px; height: 13px; border-radius: 50%; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
     .d-r { background: #ff5f57; }
     .d-y { background: #febc2e; }
     .d-g { background: #28c840; }
+    .win-title { font-size: 12px; color: #858585; margin-left: 8px; }
 
-    .window-title {
-      margin-left: 12px;
+    .prompt {
       font-size: 13px;
       color: #858585;
-      letter-spacing: 0.02em;
+      margin-bottom: 16px;
     }
-
-    .badge {
-      margin-left: auto;
-      font-size: 12px;
-      color: #C9A84C;
-      border: 1px solid rgba(201,168,76,0.35);
-      padding: 4px 14px;
-      border-radius: 2px;
-      letter-spacing: 0.06em;
-    }
-
-    .prompt-line {
-      font-size: 15px;
-      color: #858585;
-      margin-bottom: 18px;
-    }
-    .prompt-line .accent { color: #C9A84C; font-weight: 600; }
+    .prompt .acc { color: #C9A84C; font-weight: 600; }
 
     .title {
-      font-size: 72px;
+      font-size: 80px;
       font-weight: 700;
       color: #d4d4d4;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      margin-bottom: 8px;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      margin-bottom: 12px;
     }
-    .title .accent { color: #C9A84C; }
+    .title .acc { color: #C9A84C; }
 
-    .subtitle {
-      font-size: 18px;
+    .sub {
+      font-size: 15px;
       color: #858585;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       line-height: 1.5;
     }
 
-    .stats-row {
+    .stats {
       display: flex;
-      gap: 32px;
-      margin-bottom: 40px;
+      gap: 14px;
+      margin-bottom: 32px;
     }
 
     .stat {
       background: #252526;
       border: 1px solid #3e3e42;
       border-radius: 6px;
-      padding: 16px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 160px;
+      padding: 14px 20px;
+      min-width: 120px;
     }
-
-    .stat-val {
-      font-size: 28px;
-      font-weight: 700;
-      color: #C9A84C;
-      letter-spacing: -0.03em;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: #858585;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
+    .stat-v { font-size: 24px; font-weight: 700; color: #C9A84C; letter-spacing: -0.03em; }
+    .stat-l { font-size: 10px; color: #858585; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: auto;
+      gap: 8px;
+      justify-content: center;
     }
-
     .tag {
-      background: rgba(37,37,38,0.9);
+      background: #252526;
       border: 1px solid #3e3e42;
       color: #d4d4d4;
-      font-size: 13px;
-      padding: 5px 14px;
+      font-size: 12px;
+      padding: 4px 12px;
       border-radius: 2px;
     }
 
-    .author-row {
+    /* ── RIGHT PANEL (outside square crop, decorative) ── */
+    .right-panel {
       position: absolute;
-      bottom: 44px;
-      right: 72px;
-      font-size: 13px;
-      color: #858585;
-      text-align: right;
-    }
-    .author-row .name { color: #C9A84C; font-weight: 600; }
-
-    .tier-col {
-      position: absolute;
-      right: 72px;
-      top: 50%;
+      right: 40px; top: 50%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: -20px;
+      gap: 0;
+      width: 210px;
+      opacity: 0.7;
     }
 
-    .tier {
-      background: #252526;
-      border: 1px solid #3e3e42;
-      border-radius: 6px;
-      padding: 12px 20px;
-      font-size: 12px;
-      color: #858585;
-      min-width: 240px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
+    .badge {
+      font-size: 11px;
+      color: #C9A84C;
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 5px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .tier .t-head { color: #C9A84C; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; }
-    .tier .t-val { color: #d4d4d4; font-size: 13px; }
-    .tier .t-pct { color: #28c840; font-size: 11px; }
+    .author { font-size: 13px; color: #C9A84C; font-weight: 600; margin-top: 20px; }
+    .gh { font-size: 11px; color: #858585; margin-top: 3px; }
+
+    /* square crop guide (dev only — comment out before screenshot) */
+    /* .crop-guide {
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 630px;
+      transform: translateX(-50%);
+      border: 2px dashed rgba(255,0,0,0.3);
+      pointer-events: none;
+      z-index: 99;
+    } */
   </style>
 </head>
 <body>
 <div class="card">
+  <!-- <div class="crop-guide"></div> -->
 
-  <div class="top-bar">
-    <span class="dot d-r"></span>
-    <span class="dot d-y"></span>
-    <span class="dot d-g"></span>
-    <span class="window-title">archit@portfolio: ~/triagegeist-solution</span>
-    <span class="badge">$10K KAGGLE COMPETITION</span>
-  </div>
-
-  <div class="prompt-line">
-    <span class="accent">archit@portfolio:~$</span> ls ./triagegeist-solution/
-  </div>
-
-  <div class="title">Triage<span class="accent">geist</span></div>
-  <div class="subtitle">Emergency Triage Acuity Prediction &mdash; 80k clinical ED records</div>
-
-  <div class="stats-row">
-    <div class="stat">
-      <span class="stat-val">0.9995</span>
-      <span class="stat-label">CV Accuracy</span>
+  <!-- LEFT: tier breakdown (outside square crop) -->
+  <div class="left-panel">
+    <div class="mini-tier">
+      <div class="th">// TIER 1</div>
+      <div class="tv">Complaint lookup</div>
+      <div class="tp">19,885 rows → 99.4%</div>
     </div>
-    <div class="stat">
-      <span class="stat-val">99.4%</span>
-      <span class="stat-label">Lookup Coverage</span>
+    <div class="mini-tier">
+      <div class="th">// TIER 2</div>
+      <div class="tv">Glaucoma LightGBM</div>
+      <div class="tp">76 rows → 0.4%</div>
     </div>
-    <div class="stat">
-      <span class="stat-val">+10.8pt</span>
-      <span class="stat-label">TF-IDF Gain</span>
-    </div>
-    <div class="stat">
-      <span class="stat-val">3-tier</span>
-      <span class="stat-label">Hybrid System</span>
+    <div class="mini-tier">
+      <div class="th">// TIER 3</div>
+      <div class="tv">Multiclass fallback</div>
+      <div class="tp">39 rows → 0.2%</div>
     </div>
   </div>
 
-  <div class="tags">
-    <span class="tag">python</span>
-    <span class="tag">lightgbm</span>
-    <span class="tag">tf-idf</span>
-    <span class="tag">scikit-learn</span>
-    <span class="tag">pandas</span>
-    <span class="tag">streamlit</span>
+  <!-- CENTER: always visible in both cover and square crop -->
+  <div class="center">
+    <div class="top-bar">
+      <span class="dot d-r"></span>
+      <span class="dot d-y"></span>
+      <span class="dot d-g"></span>
+      <span class="win-title">archit@portfolio: ~/triagegeist-solution</span>
+    </div>
+
+    <div class="prompt">
+      <span class="acc">archit@portfolio:~$</span> ls ./triagegeist-solution/
+    </div>
+
+    <div class="title">Triage<span class="acc">geist</span></div>
+    <div class="sub">Emergency Triage Acuity Prediction · 80k clinical ED records</div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-v">0.9995</div>
+        <div class="stat-l">CV Accuracy</div>
+      </div>
+      <div class="stat">
+        <div class="stat-v">+10.8pt</div>
+        <div class="stat-l">TF-IDF Gain</div>
+      </div>
+      <div class="stat">
+        <div class="stat-v">3-tier</div>
+        <div class="stat-l">Hybrid System</div>
+      </div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">python</span>
+      <span class="tag">lightgbm</span>
+      <span class="tag">tf-idf</span>
+      <span class="tag">scikit-learn</span>
+    </div>
   </div>
 
-  <div class="tier-col">
-    <div class="tier">
-      <span class="t-head">// TIER 1</span>
-      <span class="t-val">Complaint lookup</span>
-      <span class="t-pct">19,885 rows &rarr; 99.4%</span>
+  <!-- RIGHT: badge + author (outside square crop) -->
+  <div class="right-panel">
+    <div class="badge">$10K KAGGLE COMPETITION</div>
+    <div style="border-top: 1px solid #3e3e42; padding-top: 16px;">
+      <div style="font-size: 10px; color: #858585; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;">// author</div>
+      <div class="author">Archit Konde</div>
+      <div class="gh">github.com/Archit-Konde</div>
     </div>
-    <div class="tier">
-      <span class="t-head">// TIER 2</span>
-      <span class="t-val">Glaucoma binary LightGBM</span>
-      <span class="t-pct">76 rows &rarr; 0.4%</span>
-    </div>
-    <div class="tier">
-      <span class="t-head">// TIER 3</span>
-      <span class="t-val">Multiclass fallback</span>
-      <span class="t-pct">39 rows &rarr; 0.2%</span>
-    </div>
-  </div>
-
-  <div class="author-row">
-    <div class="name">Archit Konde</div>
-    <div>github.com/Archit-Konde</div>
   </div>
 
 </div>
