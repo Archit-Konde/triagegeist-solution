@@ -12,7 +12,7 @@ st.caption("Live experiment tracker · Kaggle competition · $10,000 prize")
 # Load experiments
 records = []
 import os
-EXPERIMENTS_PATH = os.path.join(os.path.dirname(__file__), "experiments.jsonl")
+EXPERIMENTS_PATH = os.path.join(os.path.dirname(__file__), "..", "experiments.jsonl")
 
 try:
     with open(EXPERIMENTS_PATH) as f:
