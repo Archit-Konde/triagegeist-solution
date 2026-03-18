@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1200" />
+  <title>Triagegeist Thumbnail</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      background: #1e1e1e;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card {
+      width: 1200px;
+      height: 630px;
+      background: #1e1e1e;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 56px 72px;
+      gap: 0;
+    }
+
+    /* subtle grid bg */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* accent corner glow */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .dot { width: 13px; height: 13px; border-radius: 50%; }
+    .d-r { background: #ff5f57; }
+    .d-y { background: #febc2e; }
+    .d-g { background: #28c840; }
+
+    .window-title {
+      margin-left: 12px;
+      font-size: 13px;
+      color: #858585;
+      letter-spacing: 0.02em;
+    }
+
+    .badge {
+      margin-left: auto;
+      font-size: 12px;
+      color: #C9A84C;
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 4px 14px;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    .prompt-line {
+      font-size: 15px;
+      color: #858585;
+      margin-bottom: 18px;
+    }
+    .prompt-line .accent { color: #C9A84C; font-weight: 600; }
+
+    .title {
+      font-size: 72px;
+      font-weight: 700;
+      color: #d4d4d4;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .title .accent { color: #C9A84C; }
+
+    .subtitle {
+      font-size: 18px;
+      color: #858585;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .stat {
+      background: #252526;
+      border: 1px solid #3e3e42;
+      border-radius: 6px;
+      padding: 16px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 160px;
+    }
+
+    .stat-val {
+      font-size: 28px;
+      font-weight: 700;
+      color: #C9A84C;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #858585;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .tag {
+      background: rgba(37,37,38,0.9);
+      border: 1px solid #3e3e42;
+      color: #d4d4d4;
+      font-size: 13px;
+      padding: 5px 14px;
+      border-radius: 2px;
+    }
+
+    .author-row {
+      position: absolute;
+      bottom: 44px;
+      right: 72px;
+      font-size: 13px;
+      color: #858585;
+      text-align: right;
+    }
+    .author-row .name { color: #C9A84C; font-weight: 600; }
+
+    .tier-col {
+      position: absolute;
+      right: 72px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: -20px;
+    }
+
+    .tier {
+      background: #252526;
+      border: 1px solid #3e3e42;
+      border-radius: 6px;
+      padding: 12px 20px;
+      font-size: 12px;
+      color: #858585;
+      min-width: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .tier .t-head { color: #C9A84C; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; }
+    .tier .t-val { color: #d4d4d4; font-size: 13px; }
+    .tier .t-pct { color: #28c840; font-size: 11px; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="top-bar">
+    <span class="dot d-r"></span>
+    <span class="dot d-y"></span>
+    <span class="dot d-g"></span>
+    <span class="window-title">archit@portfolio: ~/triagegeist-solution</span>
+    <span class="badge">$10K KAGGLE COMPETITION</span>
+  </div>
+
+  <div class="prompt-line">
+    <span class="accent">archit@portfolio:~$</span> ls ./triagegeist-solution/
+  </div>
+
+  <div class="title">Triage<span class="accent">geist</span></div>
+  <div class="subtitle">Emergency Triage Acuity Prediction &mdash; 80k clinical ED records</div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-val">0.9995</span>
+      <span class="stat-label">CV Accuracy</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">99.4%</span>
+      <span class="stat-label">Lookup Coverage</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">+10.8pt</span>
+      <span class="stat-label">TF-IDF Gain</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">3-tier</span>
+      <span class="stat-label">Hybrid System</span>
+    </div>
+  </div>
+
+  <div class="tags">
+    <span class="tag">python</span>
+    <span class="tag">lightgbm</span>
+    <span class="tag">tf-idf</span>
+    <span class="tag">scikit-learn</span>
+    <span class="tag">pandas</span>
+    <span class="tag">streamlit</span>
+  </div>
+
+  <div class="tier-col">
+    <div class="tier">
+      <span class="t-head">// TIER 1</span>
+      <span class="t-val">Complaint lookup</span>
+      <span class="t-pct">19,885 rows &rarr; 99.4%</span>
+    </div>
+    <div class="tier">
+      <span class="t-head">// TIER 2</span>
+      <span class="t-val">Glaucoma binary LightGBM</span>
+      <span class="t-pct">76 rows &rarr; 0.4%</span>
+    </div>
+    <div class="tier">
+      <span class="t-head">// TIER 3</span>
+      <span class="t-val">Multiclass fallback</span>
+      <span class="t-pct">39 rows &rarr; 0.2%</span>
+    </div>
+  </div>
+
+  <div class="author-row">
+    <div class="name">Archit Konde</div>
+    <div>github.com/Archit-Konde</div>
+  </div>
+
+</div>
+</body>
+</html>
