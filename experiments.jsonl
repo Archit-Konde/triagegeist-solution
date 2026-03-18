@@ -1,0 +1,10 @@
+{"timestamp": "2026-03-17T20:58:51", "cv_score": 0.891, "cv_std": 0.001868, "fold_scores": [0.8925, 0.887437, 0.891875, 0.892312, 0.890875], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:03:28", "cv_score": 0.983625, "cv_std": 0.001159, "fold_scores": [0.984187, 0.9815, 0.984437, 0.984688, 0.983313], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:07:23", "cv_score": 0.991875, "cv_std": 0.000808, "fold_scores": [0.991375, 0.991563, 0.992687, 0.992938, 0.990812], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:10:56", "cv_score": 0.994813, "cv_std": 0.000492, "fold_scores": [0.995437, 0.99425, 0.99475, 0.995313, 0.994313], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:15:37", "cv_score": 0.998025, "cv_std": 0.000366, "fold_scores": [0.997812, 0.997812, 0.99875, 0.997812, 0.997938], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:20:50", "cv_score": 0.99885, "cv_std": 0.000372, "fold_scores": [0.998812, 0.998313, 0.999375, 0.998625, 0.999125], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:27:24", "cv_score": 0.998863, "cv_std": 0.000425, "fold_scores": [0.998687, 0.9985, 0.999563, 0.998437, 0.999125], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:36:04", "cv_score": 0.99805, "cv_std": 0.000388, "fold_scores": [0.998188, 0.99775, 0.998687, 0.997563, 0.998062], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:46:55", "cv_score": 0.99805, "cv_std": 0.000388, "fold_scores": [0.998188, 0.99775, 0.998687, 0.997563, 0.998062], "type": "cv_run", "status": "pending_keep_or_revert"}
+{"timestamp": "2026-03-17T21:53:23", "cv_score": 0.99805, "cv_std": 0.000388, "fold_scores": [0.998188, 0.99775, 0.998687, 0.997563, 0.998062], "type": "cv_run", "status": "pending_keep_or_revert"}
