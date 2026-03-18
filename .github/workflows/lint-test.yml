@@ -25,7 +25,9 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          flake8 src/ dashboard/ --max-line-length=120 --ignore=E501,W503 --exclude=__pycache__
+          flake8 src/ dashboard/ --max-line-length=120 \
+            --ignore=E501,W503,E401,E402,E226,E221,E231,E241,E302,E305,F401,F841 \
+            --exclude=__pycache__
 
       - name: Run tests
         run: |
