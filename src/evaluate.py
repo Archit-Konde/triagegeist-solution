@@ -1,20 +1,16 @@
-#!/usr/bin/env python
 """
 Locked evaluation pipeline — DO NOT MODIFY.
 Stratified 5-fold CV. Calls train_and_predict() from pipeline.py.
 """
-import json, time
+import json
+import time
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score
 from pipeline import train_and_predict
+from config import TRAIN_PATH, TARGET_COL, N_FOLDS, RANDOM_STATE, EXPERIMENTS_LOG
 
-TRAIN_PATH = "data/train.csv"
-TARGET_COL = "triage_acuity"
-ID_COL = "patient_id"
-N_FOLDS = 5
-RANDOM_STATE = 42
 
 def main():
     train = pd.read_csv(TRAIN_PATH)
@@ -46,8 +42,9 @@ def main():
         "type": "cv_run",
         "status": "pending_keep_or_revert"
     }
-    with open("experiments.jsonl", "a") as f:
+    with open(EXPERIMENTS_LOG, "a") as f:
         f.write(json.dumps(entry) + "\n")
+
 
 if __name__ == "__main__":
     main()

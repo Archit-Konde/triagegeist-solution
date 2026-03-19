@@ -119,14 +119,21 @@ X_val_fe = apply_features(X_val, fit_params)
 ```
 triagegeist-solution/
 ├── src/
+│   ├── config.py                     # Paths, hyperparams, feature lists
 │   ├── features.py                   # Feature engineering
 │   ├── pipeline.py                   # LightGBM baseline
 │   ├── evaluate.py                   # Locked 5-fold CV evaluator
 │   └── generate_submission_final.py  # 3-tier hybrid predictor
 ├── notebooks/
-│   └── exploration.ipynb             # EDA and signal discovery
+│   ├── exploration.ipynb             # EDA and signal discovery
+│   └── solution.ipynb                # Full Kaggle solution notebook
 ├── dashboard/
 │   └── dashboard.py                  # Streamlit experiment tracker
+├── docs/
+│   ├── index.html                    # Terminal-styled project page
+│   └── thumbnail.html               # Kaggle writeup thumbnail
+├── tests/
+│   └── test_features.py             # Feature engineering + config tests
 ├── experiments.jsonl                 # Full experiment audit trail
 └── requirements.txt
 ```

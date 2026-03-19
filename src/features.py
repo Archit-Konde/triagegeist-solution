@@ -1,26 +1,19 @@
-#!/usr/bin/env python
 """
 Feature engineering for Triagegeist.
 Merges: main table + chief_complaints + patient_history.
 fit_params pattern: engineer_features(df, is_train=True) fits encoders,
                     apply_features(df, fit_params) applies them to val/test.
 """
-import re
-import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-
-# Columns to drop — post-triage leakage (not in test set)
-LEAKAGE_COLS = ["ed_los_hours", "disposition"]
-
-# High-cardinality ID cols that won't generalize
-DROP_COLS = ["triage_nurse_id", "site_id"]
+from config import (COMPLAINTS_PATH, HISTORY_PATH, LEAKAGE_COLS, DROP_COLS,
+                    VITAL_COLS, TFIDF_MAX_FEATURES, TFIDF_NGRAM_RANGE, TFIDF_MIN_DF)
 
 
 def _load_aux(df):
     """Merge chief_complaints and patient_history onto main dataframe."""
-    complaints = pd.read_csv("data/chief_complaints.csv")
-    history = pd.read_csv("data/patient_history.csv")
+    complaints = pd.read_csv(COMPLAINTS_PATH)
+    history = pd.read_csv(HISTORY_PATH)
 
     df = df.merge(complaints[["patient_id", "chief_complaint_raw"]], on="patient_id", how="left")
     df = df.merge(history, on="patient_id", how="left")
@@ -39,18 +32,13 @@ def engineer_features(df, is_train=True, fit_params=None):
     df = df.drop(columns=[c for c in drop if c in df.columns])
 
     # ── 3. Impute missing vitals ────────────────────────────────────────────
-    vital_cols = ["systolic_bp", "diastolic_bp", "mean_arterial_pressure",
-                  "pulse_pressure", "respiratory_rate", "temperature_c",
-                  "shock_index", "heart_rate", "spo2", "weight_kg", "height_cm", "bmi"]
-    for col in vital_cols:
+    for col in VITAL_COLS:
         if col in df.columns:
             if is_train:
                 fit_params[f"median_{col}"] = df[col].median()
             df[col] = df[col].fillna(fit_params.get(f"median_{col}", 0))
 
     # ── 4. Interaction / derived features ──────────────────────────────────
-    # NEWS2 already present — it's the single strongest predictor
-    # Add a few clinically meaningful interactions
     if "respiratory_rate" in df.columns and "spo2" in df.columns:
         df["resp_x_spo2"] = df["respiratory_rate"] * df["spo2"]
     if "heart_rate" in df.columns and "systolic_bp" in df.columns:
@@ -72,8 +60,9 @@ def engineer_features(df, is_train=True, fit_params=None):
     if text_col in df.columns:
         df[text_col] = df[text_col].fillna("unknown")
         if is_train:
-            tfidf = TfidfVectorizer(max_features=2000, ngram_range=(1, 2),
-                                    sublinear_tf=True, min_df=2)
+            tfidf = TfidfVectorizer(max_features=TFIDF_MAX_FEATURES,
+                                    ngram_range=TFIDF_NGRAM_RANGE,
+                                    sublinear_tf=True, min_df=TFIDF_MIN_DF)
             tfidf.fit(df[text_col])
             fit_params["tfidf"] = tfidf
         tfidf = fit_params.get("tfidf")
