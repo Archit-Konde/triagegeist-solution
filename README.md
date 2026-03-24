@@ -173,3 +173,4 @@ streamlit run dashboard/dashboard.py
 ## Competition
 
 [Triagegeist](https://www.kaggle.com/competitions/triagegeist) — Predict emergency severity and optimize triage decisions with AI, powered by clinical data from the Laitinen-Fredriksson Foundation. Deadline: April 21, 2026.
+
